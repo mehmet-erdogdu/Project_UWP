@@ -1,0 +1,163 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="Project_UWP.Views.InkDrawPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+    <Grid x:ConnectionId='2'
+        x:Name="ContentArea"
+        Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid
+            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <CommandBar
+                DefaultLabelPosition="Collapsed"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left">
+                <CommandBar.Content>                    
+                    <InkToolbar x:ConnectionId='6' x:Name="toolbar"                                     >
+                        <InkToolbarCustomToolButton x:ConnectionId='7'
+                            x:Uid="InkDraw_LassoSelectionButton"
+                            Name="lassoSelectionButton"
+                                                            
+                                                                >
+                            <FontIcon
+                                FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                Glyph="&#xEF20;" />
+                        </InkToolbarCustomToolButton>
+                        <InkToolbarCustomToggleButton x:ConnectionId='8'
+                            x:Uid="InkDrawPictureView_TouchInkingButton"
+                            Name="touchInkingButton"
+                                                         
+                                                             >
+                            <FontIcon
+                                FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                Glyph="&#xED5F;" />
+                        </InkToolbarCustomToggleButton>
+                        <InkToolbarCustomToggleButton x:ConnectionId='9'
+                            x:Uid="InkDrawPictureView_MouseInkingButton"                            
+                            Name="mouseInkingButton"
+                                                         
+                                                             >
+                            <FontIcon
+                            FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                            Glyph="&#xE962;" />
+                        </InkToolbarCustomToggleButton>
+                    </InkToolbar>
+                </CommandBar.Content>
+                <AppBarSeparator />
+                <AppBarButton x:ConnectionId='10'
+                    BorderBrush="Transparent"
+                    BorderThickness="0,0,0,0"
+                    x:Uid="InkDraw_ZoomInButton"
+                    Icon="ZoomIn"
+                                         />
+                <AppBarButton x:ConnectionId='11'
+                    BorderBrush="Transparent"
+                    BorderThickness="0,0,0,0"
+                    x:Uid="InkDraw_ZoomOutButton"
+                    Icon="ZoomOut"
+                                          />
+                <AppBarSeparator/>
+                <AppBarButton x:ConnectionId='12'
+                    Name="CutButton"
+                    IsEnabled="False"
+                    BorderBrush="Transparent"
+                    BorderThickness="0,0,0,0"
+                    x:Uid="InkDraw_CutButton"
+                    Icon="Cut"
+                                      />
+                <AppBarButton x:ConnectionId='13'
+                    Name="CopyButton"
+                    IsEnabled="False"
+                    BorderBrush="Transparent"
+                    BorderThickness="0,0,0,0"
+                    x:Uid="InkDraw_CopyButton"
+                    Icon="Copy"
+                                       />
+                <AppBarButton x:ConnectionId='14'
+                    Name="PasteButton"
+                    IsEnabled="False"
+                    BorderBrush="Transparent"
+                    BorderThickness="0,0,0,0"
+                    x:Uid="InkDraw_PasteButton"
+                    Icon="Paste"
+                                        />
+                <AppBarSeparator />
+                <AppBarButton x:ConnectionId='15'
+                    Name="UndoButton"
+                    IsEnabled="False"
+                    BorderBrush="Transparent"
+                    BorderThickness="0,0,0,0"
+                    x:Uid="InkDraw_UndoButton"
+                    Icon="Undo"
+                                       />
+                <AppBarButton x:ConnectionId='16'
+                    Name="RedoButton"
+                    IsEnabled="False"
+                    BorderBrush="Transparent"
+                    BorderThickness="0,0,0,0"
+                    x:Uid="InkDraw_RedoButton"
+                    Icon="Redo"
+                                       />
+                <AppBarSeparator/>
+                <AppBarButton x:ConnectionId='17'
+                    BorderBrush="Transparent"
+                    BorderThickness="0,0,0,0"
+                    x:Uid="InkDraw_LoadInkFileButton"
+                    Icon="OpenFile"
+                                              />                   
+                <AppBarButton x:ConnectionId='18'
+                    Name="SaveInkFileButton"
+                    IsEnabled="False"
+                    BorderBrush="Transparent"
+                    BorderThickness="0,0,0,0"
+                    x:Uid="InkDraw_SaveInkFileButton"
+                    Icon="Save"
+                                              />
+                <AppBarButton x:ConnectionId='19'
+                    Name="ExportAsImageButton"
+                    IsEnabled="False"
+                    BorderBrush="Transparent"
+                    BorderThickness="0,0,0,0"
+                    x:Uid="InkDraw_ExportAsImageButton"
+                    Icon="Download"
+                                                />
+                <AppBarSeparator/>
+                <AppBarButton x:ConnectionId='20'
+                    Name="ClearAllButton"
+                    IsEnabled="False"
+                    BorderBrush="Transparent"
+                    BorderThickness="0,0,0,0"
+                    x:Uid="InkDraw_ClearAllButton"
+                    Icon="Delete"
+                                           />
+            </CommandBar>
+
+            <ScrollViewer x:ConnectionId='3'
+                Name="canvasScroll"
+                Grid.Row="1"
+                Margin="8,0,8,0"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                ZoomMode="Enabled">
+                    <Grid Background="{StaticResource InkCanvasBackground}"
+                          Width="{Binding ElementName=inkCanvas, Path=Width}"
+                          Height="{Binding ElementName=inkCanvas, Path=Height}">                        
+                        <InkCanvas x:ConnectionId='4' x:Name="inkCanvas"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                    <Canvas x:ConnectionId='5' x:Name="selectionCanvas"
+                            Width="{Binding ElementName=inkCanvas, Path=Width}"
+                            Height="{Binding ElementName=inkCanvas, Path=Height}"/>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>
+
